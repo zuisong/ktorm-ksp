@@ -34,14 +34,6 @@ internal fun Project.publishing(configure: PublishingExtension.() -> Unit): Unit
     extensions.configure("publishing", configure)
 }
 
-@OptIn(ExperimentalContracts::class)
-internal fun Project.signing(configure: SigningExtension.() -> Unit): Unit {
-    contract {
-        callsInPlace(configure, InvocationKind.EXACTLY_ONCE)
-    }
-    extensions.configure("signing", configure)
-}
-
 val Project.publications: PublicationContainer
     get() {
         val ret: PublicationContainer
