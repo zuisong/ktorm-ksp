@@ -89,13 +89,4 @@ fun Project.configureMavenPublishing() {
             }
         }
     }
-    signing {
-        val keyId = System.getenv("GPG_KEY_ID")
-        val secretKey = System.getenv("GPG_SECRET_KEY")
-        val password = System.getenv("GPG_PASSWORD")
-
-        assert(!project.version.toString().endsWith("SNAPSHOT"))
-        useInMemoryPgpKeys(keyId, secretKey, password)
-        sign(publications["dist"])
-    }
 }
