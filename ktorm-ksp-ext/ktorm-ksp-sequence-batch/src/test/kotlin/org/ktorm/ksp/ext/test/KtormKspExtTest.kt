@@ -190,8 +190,8 @@ public class KtormKspExtTest : BaseKspTest() {
                 data class User(
                     @PrimaryKey
                     var id: Int?,
-                    var username: String,
-                    var age: Int
+                    var username: String?,
+                    var age: Int?
                 )
 
                 object TestBridge {
