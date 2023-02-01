@@ -29,7 +29,8 @@ public data class CodeGenerateConfig(
     public val configDependencyFile: KSFile?,
     public val namingStrategy: ClassName?,
     public val localNamingStrategy: NamingStrategy?,
-    public val extensionGenerator: ExtensionGeneratorConfig
+    publuc val defaultSqlType: Map<ClassName, Class>,
+    public val extensionGenerator: ExtensionGeneratorConfig,
 ) {
 
     /**

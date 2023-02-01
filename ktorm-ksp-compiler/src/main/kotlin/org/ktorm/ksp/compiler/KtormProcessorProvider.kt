@@ -48,6 +48,17 @@ public class KtormProcessorProvider : SymbolProcessorProvider {
     }
 }
 
+public object CodeGenerateConfigHolder {
+    private lateinit var config: CodeGenerateConfig
+    public fun getConfig(): CodeGenerateConfig {
+        return this.config
+    }
+
+    internal fun setConfig(config: CodeGenerateConfig) {
+        this.config = config
+    }
+}
+
 public class KtormProcessor(
     private val environment: SymbolProcessorEnvironment,
 ) : SymbolProcessor {
@@ -62,6 +73,9 @@ public class KtormProcessor(
         logger.info("start ktorm ksp processor")
         // process config and entity class
         val (config, configRets) = processKtormKspConfig(resolver)
+
+        CodeGenerateConfigHolder.setConfig(config)
+
         val (tableDefinitions, tableRets) = processEntity(resolver)
         // start generate
         KtormCodeGenerator.generate(tableDefinitions, environment.codeGenerator, config, logger)
@@ -266,8 +280,14 @@ public class KtormProcessor(
                             error("Only one of the annotations @Column or @References is allowed to be used alone on the property")
                         }
 
-                        val sqlType =
+                        var sqlType =
                             ksColumnAnnotation?.arguments?.firstOrNull { it.name?.asString() == Column::sqlType.name }?.value as KSType?
+
+                        if (sqlType != null && sqlType.declaration.qualifiedName!!.asString() != Nothing::class.qualifiedName) {
+                            sqlType = CodeGenerateConfigHolder.getConfig().defaultSqlType.get(propertyKSType.declaration.qualifiedName!!.asString())
+                        }
+
+
                         var actualSqlType: ClassName? = null
                         var actualSqlFactoryType: ClassName? = null
                         if (sqlType != null && sqlType.declaration.qualifiedName!!.asString() != Nothing::class.qualifiedName) {

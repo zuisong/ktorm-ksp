@@ -460,7 +460,7 @@ public class DefaultTableTypeGeneratorTest : BaseKspTest() {
                 data class User(
                     @PrimaryKey
                     var id: Int?,
-                    @Column(sqlType = LocationWrapperSqlType::class)
+//                    @Column(sqlType = LocationWrapperSqlType::class)
                     var location: LocationWrapper,
                     var age: Int,
                 )
