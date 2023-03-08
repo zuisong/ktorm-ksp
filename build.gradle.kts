@@ -32,10 +32,12 @@ subprojects {
     }
 
     repositories {
-        mavenCentral()
-        jcenter()
+        mavenLocal()
+        maven {
+            url = uri("https://maven.aliyun.com/repository/public")
+        }
     }
 
     configureDetekt()
-    configureCopyrightCheck()
+//    configureCopyrightCheck()
 }

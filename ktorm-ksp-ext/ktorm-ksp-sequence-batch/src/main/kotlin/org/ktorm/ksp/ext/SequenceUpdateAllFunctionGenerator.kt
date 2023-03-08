@@ -53,6 +53,9 @@ public class SequenceUpdateAllFunctionGenerator : TopLevelFunctionGenerator {
             .returns(IntArray::class.asClassName())
             .addCode(buildCodeBlock {
                 addStatement("%M(this)", MemberNames.checkNotModified)
+                withControlFlow("if (!entities.iterator().hasNext())") {
+                    addStatement("return intArrayOf()")
+                }
                 withControlFlow("return·this.database.%M(%T)", arrayOf(batchUpdate, table.tableClassName)) {
                     withControlFlow("for (entity in entities)") {
                         withControlFlow("item") {

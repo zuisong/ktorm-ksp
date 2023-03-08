@@ -3,10 +3,11 @@ plugins {
 }
 
 repositories {
-    mavenCentral()
-    jcenter()
+    mavenLocal()
+    maven {
+        url = uri("https://maven.aliyun.com/repository/public")
+    }
 }
-
 kotlin {
     sourceSets.all {
         languageSettings.optIn("kotlin.Experimental")
