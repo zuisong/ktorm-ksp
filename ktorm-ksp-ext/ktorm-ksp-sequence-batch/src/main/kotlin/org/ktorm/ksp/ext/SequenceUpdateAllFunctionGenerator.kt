@@ -45,7 +45,7 @@ public class SequenceUpdateAllFunctionGenerator : TopLevelFunctionGenerator {
             .addKdoc(
                 """
                 Batch update based on entity primary key
-                @return the effected row counts for each sub-operation.
+                @return the effected row counts for each sub-operll ation.
             """.trimIndent()
             )
             .receiver(EntitySequence::class.asClassName().parameterizedBy(table.entityClassName, table.tableClassName))
