@@ -107,7 +107,7 @@ public object CodeFactory {
                 .forEach { column ->
                     val propertyName = column.entityPropertyName.simpleName
                     withControlFlow(
-                        "if·(%L·!==·%M<%T>())",
+                        "if·(%L·!=·%M<%T>())",
                         arrayOf(propertyName, MemberNames.undefined, column.constructorParameterType())
                     ) {
                         if (!column.isNullable && column.nonNullPropertyTypeName in primitiveTypes) {

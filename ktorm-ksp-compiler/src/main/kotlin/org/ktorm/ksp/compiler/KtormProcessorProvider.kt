@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-@file:OptIn(KotlinPoetKspPreview::class, KspExperimental::class)
+@file:OptIn(KspExperimental::class)
 
 package org.ktorm.ksp.compiler
 
@@ -27,7 +27,6 @@ import com.google.devtools.ksp.symbol.*
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.asClassName
-import com.squareup.kotlinpoet.ksp.KotlinPoetKspPreview
 import com.squareup.kotlinpoet.ksp.toClassName
 import com.squareup.kotlinpoet.ksp.toTypeName
 import org.atteo.evo.inflector.English
@@ -215,7 +214,6 @@ public class KtormProcessor(
         private val tableDefinitions: MutableList<TableDefinition>
     ) : KSVisitorVoid() {
 
-        @OptIn(KspExperimental::class, KotlinPoetKspPreview::class)
         override fun visitClassDeclaration(
             classDeclaration: KSClassDeclaration,
             data: Unit,
